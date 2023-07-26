@@ -1,8 +1,9 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { useEffect, useState } from "react";
+import liff from "@line/liff";
 
-export default function Home({ liff, liffError }) {
+export default function Home() {
 
   const [data, setData] = useState()
 
@@ -30,12 +31,15 @@ export default function Home({ liff, liffError }) {
 
   useEffect(() => {
     (async () => {
-      await getDataFromLiff()
+      await liff.init({ liffId: process.env.NEXT_PUBLIC_LIFF_ID })
+      liff.login()
+      const getData = await liff.getProfile()
+      setData(getData)
+      console.log('setLiff ', setLiff);
     })()
+    
+  }, []);
 
-    // console.log('name ', name);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
   return (
     <div>
       <Head>
