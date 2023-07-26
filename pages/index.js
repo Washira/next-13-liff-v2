@@ -35,7 +35,7 @@ export default function Home() {
       if (!liff.isLoggedIn()) liff.login()
       const getData = await liff.getProfile()
       setData(getData)
-      console.log('setLiff ', setLiff);
+      // console.log('setLiff ', setLiff);
     })()
     
   }, []);
