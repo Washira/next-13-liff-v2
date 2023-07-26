@@ -5,40 +5,47 @@ import liff from "@line/liff";
 
 export default function Home() {
 
-  const [data, setData] = useState()
+  const [data, setData] = useState([])
 
-  const getDataFromLiff = async () => {
-    if (liff) {
-      await liff.login()
-      const profile = await liff.getProfile()
-      if (profile) {
-        setData(profile)
-        console.log(profile)
-      }
+  // const getDataFromLiff = async () => {
+  //   if (liff) {
+  //     await liff.login()
+  //     const profile = await liff.getProfile()
+  //     if (profile) {
+  //       setData(profile)
+  //       console.log(profile)
+  //     }
       
-      // .then(profile => {
-      //   // profile.pictureUrl;
-      //   // profile.userId;
-      //   // profile.displayName;
-      //   // profile.statusMessage;
-      //   // liff.getDecodedIDToken().email;
+  //     // .then(profile => {
+  //     //   // profile.pictureUrl;
+  //     //   // profile.userId;
+  //     //   // profile.displayName;
+  //     //   // profile.statusMessage;
+  //     //   // liff.getDecodedIDToken().email;
 
-      //   setName(profile.displayName)
-      // })
-      // .catch(err => console.error(err));
-    }
-  }
+  //     //   setName(profile.displayName)
+  //     // })
+  //     // .catch(err => console.error(err));
+  //   }
+  // }
 
-  useEffect(() => {
-    (async () => {
-      await liff.init({ liffId: process.env.NEXT_PUBLIC_LIFF_ID })
-      if (!liff.isLoggedIn()) liff.login()
-      const getData = await liff.getProfile()
-      setData(getData)
-      // console.log('setLiff ', setLiff);
-    })()
+  // useEffect(() => {
+  //   (async () => {
+  //     await liff.init({ liffId: process.env.NEXT_PUBLIC_LIFF_ID })
+  //     .then(() => {
+  //       // if (!res.isLoggedIn()) res.login()
+  //       if (!liff.isLoggedIn()) liff.login()
+  //     })
+  //     // if (!liff.isLoggedIn()) liff.login()
+  //     // liff.login()
+      
+  //     // const getData = await liff.getProfile()
+  //     // setData(getData)
+  //     // console.log('setLiff ', setLiff);
+  //     // console.log(liff.isLoggedIn());
+  //   })()
     
-  }, []);
+  // }, []);
 
   return (
     <div>
@@ -50,7 +57,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1>create-liff-app</h1>
-        {data && <p>{data}</p>}
+        {/* {data && <p>{data}</p>} */}
         
       </main>
     </div>
