@@ -32,7 +32,7 @@ export default function Home() {
   useEffect(() => {
     (async () => {
       await liff.init({ liffId: process.env.NEXT_PUBLIC_LIFF_ID })
-      liff.login()
+      if (!liff.isLoggedIn()) liff.login()
       const getData = await liff.getProfile()
       setData(getData)
       console.log('setLiff ', setLiff);
