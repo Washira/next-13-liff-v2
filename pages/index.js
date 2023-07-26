@@ -4,22 +4,27 @@ import { useEffect, useState } from "react";
 
 export default function Home({ liff, liffError }) {
 
-  const [name, setName] = useState()
+  const [data, setData] = useState()
 
   const getDataFromLiff = async () => {
     if (liff) {
       await liff.login()
-      await liff.getProfile()
-      .then(profile => {
-        // profile.pictureUrl;
-        // profile.userId;
-        // profile.displayName;
-        // profile.statusMessage;
-        // liff.getDecodedIDToken().email;
+      const profile = await liff.getProfile()
+      if (profile) {
+        setData(profile)
+        console.log(profile)
+      }
+      
+      // .then(profile => {
+      //   // profile.pictureUrl;
+      //   // profile.userId;
+      //   // profile.displayName;
+      //   // profile.statusMessage;
+      //   // liff.getDecodedIDToken().email;
 
-        setName(profile.displayName)
-      })
-      .catch(err => console.error(err));
+      //   setName(profile.displayName)
+      // })
+      // .catch(err => console.error(err));
     }
   }
 
@@ -28,7 +33,7 @@ export default function Home({ liff, liffError }) {
       await getDataFromLiff()
     })()
 
-    console.log('name ', name);
+    // console.log('name ', name);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
@@ -41,7 +46,7 @@ export default function Home({ liff, liffError }) {
 
       <main className={styles.main}>
         <h1>create-liff-app</h1>
-        {name && <p>{name}</p>}
+        {data && <p>{data}</p>}
         
       </main>
     </div>
