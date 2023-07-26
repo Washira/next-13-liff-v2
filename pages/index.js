@@ -1,12 +1,14 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { useEffect, useState } from "react";
-import liff from "@line/liff";
+// import liff from "@line/liff";
 
-export default function Home() {
+export default function Home({ profile }) {
 
   const [data, setData] = useState([])
 
+  console.log(profile);
+  
   // const getDataFromLiff = async () => {
   //   if (liff) {
   //     await liff.login()

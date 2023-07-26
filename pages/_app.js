@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import liff from "@line/liff";
 
 function MyApp({ Component, pageProps }) {
-  // const [liffObject, setLiffObject] = useState(null);
-  // const [liffError, setLiffError] = useState(null);
+  const [liffObject, setLiffObject] = useState(null);
+  const [liffError, setLiffError] = useState(null);
 
   // Execute liff.init() when the app is initialized
   // useEffect(() => {
@@ -33,10 +33,11 @@ function MyApp({ Component, pageProps }) {
       // if (!liff.isLoggedIn()) liff.login()
       // liff.login()
       
-      // const getData = await liff.getProfile()
+      const getData = await liff.getProfile()
+      setLiffObject(getData)
       // setData(getData)
       // console.log('setLiff ', setLiff);
-      console.log(liff.isLoggedIn());
+      // console.log(liff.isLoggedIn());
     })()
   }, []);
 
@@ -55,6 +56,7 @@ function MyApp({ Component, pageProps }) {
   // to page component as property
   // pageProps.liff = liffObject;
   // pageProps.liffError = liffError;
+  pageProps.profile = liffObject;
   return <Component {...pageProps} />;
 }
 
