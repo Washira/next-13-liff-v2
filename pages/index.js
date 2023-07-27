@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 
 function Home({ liff, liffError, profile, email }) {
   const [data, setData] = useState([])
@@ -15,8 +16,9 @@ function Home({ liff, liffError, profile, email }) {
 
   useEffect(() => {
     if (profile) setData(profile)
+    console.log('email ', email)
     
-  }, [profile]);
+  }, [profile, email]);
 
   return (
     <div>
@@ -30,6 +32,12 @@ function Home({ liff, liffError, profile, email }) {
         <h1>create-liff-app</h1>
         {data && (
           <div>
+            {data.pictureUrl && (
+              <Image
+                alt={data.displayName}
+                src={data.pictureUrl}
+              />
+            )}
             <div>{data.userId}</div>
             <div>{data.displayName}</div>
             <div>{data.statusMessage}</div>
