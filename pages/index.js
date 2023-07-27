@@ -2,7 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { useEffect, useState } from 'react'
 
-function Home({ profile }) {
+function Home({ liff, liffError, profile, email }) {
   const [data, setData] = useState([])
 
   console.log(profile);
@@ -33,6 +33,7 @@ function Home({ profile }) {
             <div>{data.userId}</div>
             <div>{data.displayName}</div>
             <div>{data.statusMessage}</div>
+            {email && <div>{email}</div>}
           </div>
         )}
       </main>

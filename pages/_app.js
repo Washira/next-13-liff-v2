@@ -3,8 +3,10 @@ import { useState, useEffect } from "react";
 import liff from "@line/liff";
 
 function MyApp({ Component, pageProps }) {
-  const [liffObject, setLiffObject] = useState(null);
-  const [liffError, setLiffError] = useState(null);
+  const [liffObject, setLiffObject] = useState();
+  const [liffError, setLiffError] = useState();
+  const [profileObject, setProfileObject] = useState();
+  const [email, setEmail] = useState('');
 
   // Execute liff.init() when the app is initialized
   // useEffect(() => {
@@ -26,37 +28,32 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     (async () => {
       await liff.init({ liffId: process.env.NEXT_PUBLIC_LIFF_ID })
-      .then(() => {
-        // if (!res.isLoggedIn()) res.login()
-        if (!liff.isLoggedIn()) liff.login()
-      })
-      // if (!liff.isLoggedIn()) liff.login()
-      // liff.login()
+        .then(() => {
+          if (!liff.isLoggedIn()) liff.login()
+        })
+        .catch((error) => {
+          setLiffError(error.toString());
+        });
       
       const getData = await liff.getProfile()
-      setLiffObject(getData)
-      // setData(getData)
-      // console.log('setLiff ', setLiff);
-      // console.log(liff.isLoggedIn());
+
+      setLiffObject(liff)
+      setProfileObject(getData)
+
+      const userEmail = liff.getDecodedIDToken().email
+
+      setEmail(userEmail)
+
     })()
   }, []);
 
-  //   // liff.init({ liffId: process.env.NEXT_PUBLIC_LIFF_ID })
-  //   //   .then(() => {
-  //   //     console.log("LIFF init succeeded.");
-  //   //     setLiffObject(liff);
-  //   //   })
-  //   //   .catch((error) => {
-  //   //     console.log("LIFF init failed.");
-  //   //     setLiffError(error.toString());
-  //   //   });
-  // }, []);
 
   // Provide `liff` object and `liffError` object
   // to page component as property
-  // pageProps.liff = liffObject;
-  // pageProps.liffError = liffError;
-  pageProps.profile = liffObject;
+  pageProps.liff = liffObject;
+  pageProps.liffError = liffError;
+  pageProps.profile = profileObject;
+  pageProps.email = email;
   return <Component {...pageProps} />;
 }
 
