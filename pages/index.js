@@ -1,53 +1,22 @@
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import { useEffect, useState } from "react";
-// import liff from "@line/liff";
+import Head from 'next/head'
+import styles from '../styles/Home.module.css'
+import { useEffect, useState } from 'react'
 
-export default function Home({ profile }) {
-
+function Home({ profile }) {
   const [data, setData] = useState([])
 
   console.log(profile);
-  
-  // const getDataFromLiff = async () => {
-  //   if (liff) {
-  //     await liff.login()
-  //     const profile = await liff.getProfile()
-  //     if (profile) {
-  //       setData(profile)
-  //       console.log(profile)
-  //     }
-      
-  //     // .then(profile => {
-  //     //   // profile.pictureUrl;
-  //     //   // profile.userId;
-  //     //   // profile.displayName;
-  //     //   // profile.statusMessage;
-  //     //   // liff.getDecodedIDToken().email;
 
-  //     //   setName(profile.displayName)
-  //     // })
-  //     // .catch(err => console.error(err));
-  //   }
-  // }
+  // profile.pictureUrl
+  // profile.userId
+  // profile.displayName
+  // profile.statusMessage
+  // liff.getDecodedIDToken().email
 
-  // useEffect(() => {
-  //   (async () => {
-  //     await liff.init({ liffId: process.env.NEXT_PUBLIC_LIFF_ID })
-  //     .then(() => {
-  //       // if (!res.isLoggedIn()) res.login()
-  //       if (!liff.isLoggedIn()) liff.login()
-  //     })
-  //     // if (!liff.isLoggedIn()) liff.login()
-  //     // liff.login()
-      
-  //     // const getData = await liff.getProfile()
-  //     // setData(getData)
-  //     // console.log('setLiff ', setLiff);
-  //     // console.log(liff.isLoggedIn());
-  //   })()
+  useEffect(() => {
+    if (profile) setData(profile)
     
-  // }, []);
+  }, [profile]);
 
   return (
     <div>
@@ -59,9 +28,16 @@ export default function Home({ profile }) {
 
       <main className={styles.main}>
         <h1>create-liff-app</h1>
-        {/* {data && <p>{data}</p>} */}
-        
+        {data && (
+          <div>
+            <div>{data.userId}</div>
+            <div>{data.displayName}</div>
+            <div>{data.statusMessage}</div>
+          </div>
+        )}
       </main>
     </div>
   );
 }
+
+export default Home
